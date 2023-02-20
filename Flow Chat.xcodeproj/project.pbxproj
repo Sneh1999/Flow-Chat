@@ -11,9 +11,12 @@
 		C131153029A2875100227386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131152F29A2875100227386 /* ContentView.swift */; };
 		C131153229A2875400227386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C131153129A2875400227386 /* Assets.xcassets */; };
 		C131153529A2875400227386 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C131153429A2875400227386 /* Preview Assets.xcassets */; };
-		C131153F29A2875500227386 /* Flow_ChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131153E29A2875500227386 /* Flow_ChatTests.swift */; };
-		C131154929A2875500227386 /* Flow_ChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131154829A2875500227386 /* Flow_ChatUITests.swift */; };
-		C131154B29A2875500227386 /* Flow_ChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131154A29A2875500227386 /* Flow_ChatUITestsLaunchTests.swift */; };
+		C131156429A2A6EF00227386 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131156329A2A6EF00227386 /* LoginView.swift */; };
+		C131156729A2A94D00227386 /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = C131156629A2A94D00227386 /* FCL */; };
+		C131156C29A2AAFD00227386 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131156B29A2AAFD00227386 /* FlowManager.swift */; };
+		C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719E829A2B621003A2B08 /* AnyViewModel.swift */; };
+		C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */; };
+		C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719ED29A3D636003A2B08 /* FlowCadence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +43,12 @@
 		C131153129A2875400227386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C131153429A2875400227386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C131153A29A2875500227386 /* Flow ChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flow ChatTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C131153E29A2875500227386 /* Flow_ChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow_ChatTests.swift; sourceTree = "<group>"; };
 		C131154429A2875500227386 /* Flow ChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flow ChatUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C131154829A2875500227386 /* Flow_ChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow_ChatUITests.swift; sourceTree = "<group>"; };
-		C131154A29A2875500227386 /* Flow_ChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow_ChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C131156329A2A6EF00227386 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C131156B29A2AAFD00227386 /* FlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowManager.swift; sourceTree = "<group>"; };
+		C1F719E829A2B621003A2B08 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
+		C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		C1F719ED29A3D636003A2B08 /* FlowCadence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCadence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C131156729A2A94D00227386 /* FCL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,8 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				C131152C29A2875100227386 /* Flow Chat */,
-				C131153D29A2875500227386 /* Flow ChatTests */,
-				C131154729A2875500227386 /* Flow ChatUITests */,
 				C131152B29A2875100227386 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,8 +98,9 @@
 		C131152C29A2875100227386 /* Flow Chat */ = {
 			isa = PBXGroup;
 			children = (
+				C1F719E629A2B603003A2B08 /* UI */,
+				C131156A29A2AAF000227386 /* Flow */,
 				C131152D29A2875100227386 /* Flow_ChatApp.swift */,
-				C131152F29A2875100227386 /* ContentView.swift */,
 				C131153129A2875400227386 /* Assets.xcassets */,
 				C131153329A2875400227386 /* Preview Content */,
 			);
@@ -110,21 +115,40 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C131153D29A2875500227386 /* Flow ChatTests */ = {
+		C131156A29A2AAF000227386 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				C131153E29A2875500227386 /* Flow_ChatTests.swift */,
+				C131156B29A2AAFD00227386 /* FlowManager.swift */,
+				C1F719ED29A3D636003A2B08 /* FlowCadence.swift */,
 			);
-			path = "Flow ChatTests";
+			path = Flow;
 			sourceTree = "<group>";
 		};
-		C131154729A2875500227386 /* Flow ChatUITests */ = {
+		C1F719E629A2B603003A2B08 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C131154829A2875500227386 /* Flow_ChatUITests.swift */,
-				C131154A29A2875500227386 /* Flow_ChatUITestsLaunchTests.swift */,
+				C1F719EA29A2B640003A2B08 /* Pages */,
+				C1F719E729A2B616003A2B08 /* Base */,
 			);
-			path = "Flow ChatUITests";
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C1F719E729A2B616003A2B08 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C1F719E829A2B621003A2B08 /* AnyViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		C1F719EA29A2B640003A2B08 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				C131156329A2A6EF00227386 /* LoginView.swift */,
+				C131152F29A2875100227386 /* ContentView.swift */,
+				C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +167,9 @@
 			dependencies = (
 			);
 			name = "Flow Chat";
+			packageProductDependencies = (
+				C131156629A2A94D00227386 /* FCL */,
+			);
 			productName = "Flow Chat";
 			productReference = C131152A29A2875100227386 /* Flow Chat.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +242,9 @@
 				Base,
 			);
 			mainGroup = C131152129A2875100227386;
+			packageReferences = (
+				C131156529A2A94D00227386 /* XCRemoteSwiftPackageReference "fcl-swift" */,
+			);
 			productRefGroup = C131152B29A2875100227386 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,7 +287,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C131156C29A2AAFD00227386 /* FlowManager.swift in Sources */,
+				C131156429A2A6EF00227386 /* LoginView.swift in Sources */,
+				C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */,
+				C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */,
 				C131153029A2875100227386 /* ContentView.swift in Sources */,
+				C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */,
 				C131152E29A2875100227386 /* Flow_ChatApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +301,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C131153F29A2875500227386 /* Flow_ChatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +308,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C131154B29A2875500227386 /* Flow_ChatUITestsLaunchTests.swift in Sources */,
-				C131154929A2875500227386 /* Flow_ChatUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +449,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Flow Chat/Preview Content\"";
+				DEVELOPMENT_TEAM = A78B6D7CUR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -445,6 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Flow Chat/Preview Content\"";
+				DEVELOPMENT_TEAM = A78B6D7CUR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -577,6 +611,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C131156529A2A94D00227386 /* XCRemoteSwiftPackageReference "fcl-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/outblock/fcl-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C131156629A2A94D00227386 /* FCL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C131156529A2A94D00227386 /* XCRemoteSwiftPackageReference "fcl-swift" */;
+			productName = FCL;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C131152229A2875100227386 /* Project object */;
 }
