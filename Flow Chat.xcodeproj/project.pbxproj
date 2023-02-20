@@ -17,6 +17,8 @@
 		C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719E829A2B621003A2B08 /* AnyViewModel.swift */; };
 		C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */; };
 		C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719ED29A3D636003A2B08 /* FlowCadence.swift */; };
+		C1F719F229A415A7003A2B08 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719F129A415A7003A2B08 /* ChatView.swift */; };
+		C1F719F629A41B84003A2B08 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719F529A41B84003A2B08 /* ChatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C1F719E829A2B621003A2B08 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
 		C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C1F719ED29A3D636003A2B08 /* FlowCadence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCadence.swift; sourceTree = "<group>"; };
+		C1F719F129A415A7003A2B08 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		C1F719F529A41B84003A2B08 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 				C131156329A2A6EF00227386 /* LoginView.swift */,
 				C131152F29A2875100227386 /* ContentView.swift */,
 				C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */,
+				C1F719F129A415A7003A2B08 /* ChatView.swift */,
+				C1F719F529A41B84003A2B08 /* ChatsView.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -291,7 +297,9 @@
 				C131156429A2A6EF00227386 /* LoginView.swift in Sources */,
 				C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */,
 				C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */,
+				C1F719F229A415A7003A2B08 /* ChatView.swift in Sources */,
 				C131153029A2875100227386 /* ContentView.swift in Sources */,
+				C1F719F629A41B84003A2B08 /* ChatsView.swift in Sources */,
 				C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */,
 				C131152E29A2875100227386 /* Flow_ChatApp.swift in Sources */,
 			);

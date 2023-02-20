@@ -34,7 +34,6 @@ class ContentViewModel: ViewModel {
     
     private func getBalance() {
         Task {
-            print("Hello I came to get Balance")
             guard let address = fcl.currentUser?.addr else {
                 throw FCLError.unauthenticated
             }

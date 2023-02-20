@@ -75,7 +75,7 @@ struct ContentView: View {
                             self.flowRecipient = newRecipient
                         }
                     }
-                   
+                    
                     
                     
                     
@@ -86,7 +86,7 @@ struct ContentView: View {
                     }
                 }
                 
-               
+                
                 
                 Text("Amount of usdc to transfer")
                 TextField(
