@@ -15,24 +15,24 @@ struct LoginView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 500.0, height: 500.0, alignment: .center)
-                .clipShape(Circle())
+            
             Button {
                 fcl.openDiscovery()
             } label: {
                 Text("Connect Wallet")
-                    .font(.title2)
+                    .font(.title)
                     .bold()
                     .foregroundColor(.white)
             }
-            .frame(height: 50)
-            .frame(maxWidth: .infinity)
-            .background(
-                LinearGradient(colors: [.blue, .purple],                   startPoint: .topLeading,                   endPoint: .bottomTrailing) 
-            )
+            .frame(height: 75)
+            .padding([.leading, .trailing], 50)
+            .background(.black)
             .cornerRadius(10)
-            .padding()
             
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // 1
+        .accentColor(Color.black)
+        .background(Color(red: 0, green: 239/255, blue: 139/255))
         
     }
 }

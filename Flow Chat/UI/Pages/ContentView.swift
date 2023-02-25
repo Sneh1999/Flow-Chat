@@ -40,13 +40,13 @@ struct ContentView: View {
         NavigationView {
             
             VStack {
-                
+             
                 Text("I am logged in")
                 Text("My balance is: " + vm.state.balance.description + " FLOW tokens")
                     .onReceive(timer) { time in
                         vm.trigger(.getBalance)
                     }
-                
+
                 Text(response)
                 
                 Group {
@@ -84,6 +84,7 @@ struct ContentView: View {
                     } label: {
                         Text("Send Flow")
                     }
+                    
                 }
                 
                 

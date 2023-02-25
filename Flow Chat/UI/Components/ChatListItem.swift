@@ -1,13 +1,13 @@
 //
-//  ChatView.swift
+//  ChatListItem.swift
 //  Flow Chat
 //
-//  Created by Sneh Koul on 2023-02-20.
+//  Created by Sneh Koul on 2023-02-24.
 //
 
 import SwiftUI
 
-struct ChatView: View {
+struct ChatListItem: View {
     var body: some View {
         HStack {
             Image("profile")
@@ -40,12 +40,12 @@ struct ChatView: View {
             }
         }
         .listRowSeparator(.hidden)
-        
+    
     }
 }
 
-struct ChatView_Previews: PreviewProvider {
+struct ChatListItem_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView()
+        ChatListItem()
     }
 }
