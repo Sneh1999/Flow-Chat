@@ -37,7 +37,7 @@ struct Flow_ChatApp: App {
         WindowGroup {
             if isLogin {
 //                ContentView(vm: .init(ContentViewModel()))
-                ChatsView()
+                ChatsView(sheetChatID: "", sheetRecipient: "", sheetMessage: "")
                 
             } else {
                 LoginView().onReceive(fcl.$currentUser) { value in

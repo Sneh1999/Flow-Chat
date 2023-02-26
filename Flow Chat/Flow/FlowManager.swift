@@ -113,6 +113,7 @@ class FlowManager: ObservableObject {
             .put("0xFlowToken", value: "0x7e60df042a9c0868")
             .put("0xFungibleToken", value: "0x631e88ae7f1d7c20")
             .put("0xFiatToken", value: "0xa983fecbed621163")
+            .put("0xTopshotAddress", value: "0x877931736ee77cff")
     }
     
 }

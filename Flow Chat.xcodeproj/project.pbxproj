@@ -31,6 +31,10 @@
 		C1CB21E829A9BEE7002C08AD /* ChatListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21E729A9BEE7002C08AD /* ChatListItem.swift */; };
 		C1CB21EC29A9E2D3002C08AD /* SendNewMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21EB29A9E2D3002C08AD /* SendNewMessage.swift */; };
 		C1CB21EF29AA5D34002C08AD /* FlownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21EE29AA5D34002C08AD /* FlownManager.swift */; };
+		C1CB21F229AA94F2002C08AD /* ChatMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21F129AA94F2002C08AD /* ChatMessagesView.swift */; };
+		C1CB21F429AA98D4002C08AD /* PrimaryMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21F329AA98D4002C08AD /* PrimaryMessage.swift */; };
+		C1CB21F729AA9946002C08AD /* ChatBubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21F629AA9946002C08AD /* ChatBubbleShape.swift */; };
+		C1CB21F929AA9995002C08AD /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CB21F829AA9995002C08AD /* ChatBubble.swift */; };
 		C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719E829A2B621003A2B08 /* AnyViewModel.swift */; };
 		C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */; };
 		C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F719ED29A3D636003A2B08 /* FlowCadence.swift */; };
@@ -69,6 +73,10 @@
 		C1CB21E729A9BEE7002C08AD /* ChatListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListItem.swift; sourceTree = "<group>"; };
 		C1CB21EB29A9E2D3002C08AD /* SendNewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNewMessage.swift; sourceTree = "<group>"; };
 		C1CB21EE29AA5D34002C08AD /* FlownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlownManager.swift; sourceTree = "<group>"; };
+		C1CB21F129AA94F2002C08AD /* ChatMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesView.swift; sourceTree = "<group>"; };
+		C1CB21F329AA98D4002C08AD /* PrimaryMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryMessage.swift; sourceTree = "<group>"; };
+		C1CB21F629AA9946002C08AD /* ChatBubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleShape.swift; sourceTree = "<group>"; };
+		C1CB21F829AA9995002C08AD /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		C1F719E829A2B621003A2B08 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
 		C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C1F719ED29A3D636003A2B08 /* FlowCadence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCadence.swift; sourceTree = "<group>"; };
@@ -176,6 +184,8 @@
 			children = (
 				C1CB21E729A9BEE7002C08AD /* ChatListItem.swift */,
 				C1CB21EB29A9E2D3002C08AD /* SendNewMessage.swift */,
+				C1CB21F329AA98D4002C08AD /* PrimaryMessage.swift */,
+				C1CB21F829AA9995002C08AD /* ChatBubble.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -188,9 +198,18 @@
 			path = Flowns;
 			sourceTree = "<group>";
 		};
+		C1CB21F529AA9932002C08AD /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				C1CB21F629AA9946002C08AD /* ChatBubbleShape.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		C1F719E629A2B603003A2B08 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C1CB21F529AA9932002C08AD /* Shapes */,
 				C1CB21E629A9BEC8002C08AD /* Components */,
 				C1F719EA29A2B640003A2B08 /* Pages */,
 				C1F719E729A2B616003A2B08 /* Base */,
@@ -213,6 +232,7 @@
 				C131152F29A2875100227386 /* ContentView.swift */,
 				C1F719EB29A2B66A003A2B08 /* ContentViewModel.swift */,
 				C1F719F529A41B84003A2B08 /* ChatsView.swift */,
+				C1CB21F129AA94F2002C08AD /* ChatMessagesView.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -368,9 +388,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C131156C29A2AAFD00227386 /* FlowManager.swift in Sources */,
+				C1CB21F729AA9946002C08AD /* ChatBubbleShape.swift in Sources */,
 				C131156429A2A6EF00227386 /* LoginView.swift in Sources */,
+				C1CB21F429AA98D4002C08AD /* PrimaryMessage.swift in Sources */,
 				C1CB21EF29AA5D34002C08AD /* FlownManager.swift in Sources */,
+				C1CB21F229AA94F2002C08AD /* ChatMessagesView.swift in Sources */,
 				C180885829A864DE00C90D87 /* FirebaseManager.swift in Sources */,
+				C1CB21F929AA9995002C08AD /* ChatBubble.swift in Sources */,
 				C1CB21EC29A9E2D3002C08AD /* SendNewMessage.swift in Sources */,
 				C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */,
 				C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */,
