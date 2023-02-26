@@ -14,7 +14,9 @@ struct Message: Codable, Hashable {
     var content: String
     var created_at: Date
     var receiver: String
+    var receiverFlown: String
     var sender: String
+    var senderFlown: String
 }
 
 struct ChatInfo: Codable {
@@ -40,13 +42,14 @@ class FirebaseManager: ObservableObject {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    let hasThisAlready = self.allChats.contains { $0.id == document.documentID }
-                    if (!hasThisAlready) {
-                        let decodedChatInfo = try? document.data(as: ChatInfo.self)
-                        
-                        if (decodedChatInfo != nil ) {
-                            print(decodedChatInfo!)
+                    let existingIndex = self.allChats.firstIndex(where: { $0.id == document.documentID }) ?? -1
+                    
+                    let decodedChatInfo = try? document.data(as: ChatInfo.self)
+                    if (decodedChatInfo != nil) {
+                        if (existingIndex < 0) {
                             self.allChats.append(decodedChatInfo!)
+                        } else {
+                            self.allChats[existingIndex] = decodedChatInfo!
                         }
                     }
                 }
@@ -58,12 +61,14 @@ class FirebaseManager: ObservableObject {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    let hasThisAlready = self.allChats.contains { $0.id == document.documentID }
-                    if (!hasThisAlready) {
-                        let decodedChatInfo = try? document.data(as: ChatInfo.self)
-                        
-                        if (decodedChatInfo != nil ) {
+                    let existingIndex = self.allChats.firstIndex(where: { $0.id == document.documentID }) ?? -1
+                    
+                    let decodedChatInfo = try? document.data(as: ChatInfo.self)
+                    if (decodedChatInfo != nil) {
+                        if (existingIndex < 0) {
                             self.allChats.append(decodedChatInfo!)
+                        } else {
+                            self.allChats[existingIndex] = decodedChatInfo!
                         }
                     }
                 }
@@ -71,9 +76,15 @@ class FirebaseManager: ObservableObject {
         }
     }
     
-    func addMessagesToChat(chatId: String, receiver: String, sender: String, content: String) {
+    func addMessagesToChat(chatId: String, receiver: String, receiverFlown: String, sender: String, senderFlown: String, content: String) {
         let db = Firestore.firestore()
-        let message = Message(content: content, created_at: Date(), receiver: receiver, sender: sender)
+        let message = Message(content: content,
+                              created_at: Date(),
+                              receiver: receiver,
+                              receiverFlown: receiverFlown,
+                              sender: sender,
+                              senderFlown: senderFlown
+                            )
         
         let encodedMessage: [String: Any]
         do {

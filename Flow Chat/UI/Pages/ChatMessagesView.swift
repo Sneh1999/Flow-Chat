@@ -6,30 +6,52 @@
 //
 
 import SwiftUI
+import Flow
+
 
 struct ChatMessagesView: View {
     
+    @ObservedObject var firebase = FirebaseManager.shared
     @State var chatId: String
     @State var recipient: String
     @State var message: String = ""
+    @FocusState var messageIsFocused: Bool
     
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
-                ChatBubble(direction: .left) {
-                    Text("Hello!")
-                        .padding(.all, 20)
-                        .foregroundColor(Color.white)
-                        .background(Color.blue)
+                ScrollView {
+                    ScrollViewReader { value in
+                        VStack {
+                            Spacer()
+                            ForEach(firebase.allChats.first(where: {$0.id == chatId})!.messages, id: \.hashValue) { message in
+                                if message.receiver == FlowManager.shared.userAddress! {
+                                    ChatBubble(direction: .left) {
+                                        Text(message.content)
+                                            .padding([.leading, .trailing], 20)
+                                            .padding([.top, .bottom], 15)
+                                            .foregroundColor(Color.white)
+                                            .background(Color.green)
+                                    }
+                                    .padding(.horizontal, 20)
+                                } else {
+                                    ChatBubble(direction: .right) {
+                                        Text(message.content)
+                                            .padding([.leading, .trailing], 20)
+                                            .padding([.top, .bottom], 15)
+                                            .foregroundColor(Color.white)
+                                            .background(Color.blue)
+                                    }
+                                }
+                            }
+                            .onChange(of: firebase.allChats.first(where: {$0.id == chatId})!.messages.count) { _ in
+                                value.scrollTo(firebase.allChats.first(where: {$0.id == chatId})!.messages.last?.hashValue)
+                            }
+                            
+                        }
+                    }
                 }
-                .padding(.horizontal, 20)
-                ChatBubble(direction: .right) {
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut semper quam. Phasellus non mauris sem. Donec sed fermentum eros. Donec pretium nec turpis a semper. ")
-                        .padding(.all, 20)
-                        .foregroundColor(Color.white)
-                        .background(Color.blue)
-                }
+                
                 HStack {
                     Image(systemName: "dollarsign.circle.fill")
                         .foregroundColor(Color(red: 39/255, green: 116/255, blue: 202/255))
@@ -42,14 +64,16 @@ struct ChatMessagesView: View {
                         Spacer()
                         TextField("What's on your mind?", text: $message)
                             .frame(maxWidth: .infinity)
+                            .focused($messageIsFocused)
                         Button(action: {
                             sendMessage()
+                            messageIsFocused.toggle()
                         }) {
                             Image(systemName: "arrow.up.circle.fill")
                                 .foregroundColor(.green)
                                 .font(.system(size: 25))
                         }
-                            
+                        
                     }
                     .padding(.horizontal, 5)
                     .padding(.vertical, 5)
@@ -77,10 +101,14 @@ struct ChatMessagesView: View {
     }
     
     func sendMessage() {
+        let recieverFlown = FlownManager.shared.getFlownFromAddress(userAddress: self.recipient)
+        let senderFlown = FlownManager.shared.getFlownFromAddress(userAddress: FlowManager.shared.userAddress!)
         FirebaseManager.shared.addMessagesToChat(
-            chatId: self.chatId,
+            chatId: chatId,
             receiver: self.recipient,
+            receiverFlown: recieverFlown.isEmpty ? "" : recieverFlown[0].name,
             sender: FlowManager.shared.userAddress!,
+            senderFlown: senderFlown.isEmpty ? "" : senderFlown[0].name,
             content: self.message
         )
     }

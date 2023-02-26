@@ -67,13 +67,19 @@ struct SendNewMessage: View {
     
     func sendMessage() {
         let chatId = FirebaseManager.shared.createChat(primaryUser: FlowManager.shared.userAddress!, secondaryUser: self.sheetRecipient)
+        let recieverFlown = FlownManager.shared.getFlownFromAddress(userAddress: self.sheetRecipient)
+        let senderFlown = FlownManager.shared.getFlownFromAddress(userAddress: FlowManager.shared.userAddress!)
         FirebaseManager.shared.addMessagesToChat(
             chatId: chatId,
             receiver: self.sheetRecipient,
+            receiverFlown: recieverFlown.isEmpty ? "" : recieverFlown[0].name ,
             sender: FlowManager.shared.userAddress!,
+            senderFlown: senderFlown.isEmpty ? "" : senderFlown[0].name,
             content: self.sheetMessage
         )
+        
         self.sheetChatID = chatId
+        self.sheetRecipient = recieverFlown.isEmpty ? "" : recieverFlown[0].name
         self.showChatView.toggle()
         self.sendNewMessageModalShowing.toggle()
     }

@@ -110,7 +110,7 @@ struct ChatsView: View {
     }
     
     func getAddressFromFlown(flown: String) {
-        FlownManager.shared.getAddressFromFlow(flownName: flown)
+        FlownManager.shared.getAddressFromFlown(flownName: flown)
     }
     
     func transferFlow(amount: Decimal) {
