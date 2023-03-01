@@ -141,9 +141,13 @@ class FlowCadence {
         let acct = getAccount(account)
 
         let collectionRef = acct.getCapability(/public/MomentCollection)
-                                .borrow<&{TopShot.MomentCollectionPublic}>()!
+                                .borrow<&{TopShot.MomentCollectionPublic}>()
+    
+        if collectionRef == nil {
+            return []
+        }
 
-        return collectionRef.getIDs()
+        return collectionRef!.getIDs()
     }
     """
 }
