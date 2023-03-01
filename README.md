@@ -1,7 +1,7 @@
 # Flow-Chat
 
 
-Consider Flow chat as Venmo for US, Wechat for China and Paytm for India. It lends you send and recieve messages along with crypto. 
+Consider Flow chat as Venmo for US, Wechat for China and Paytm for India. It allows you to send and recieve messages along with crypto. 
 
 The mission is to make it as simple and friendly to send and recieve crypto for the users.
 
