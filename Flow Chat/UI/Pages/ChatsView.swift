@@ -26,7 +26,8 @@ struct ChatsView: View {
                     
                     NavigationLink {
                         ChatMessagesView(
-                            chatId: chat.id!, recipient: FlowManager.shared.userAddress == chat.primary_user ? chat.secondary_user : chat.primary_user
+                            chatId: .constant(chat.id!), recipient:
+                                    .constant(getRecipient(chat: chat)), message: .constant("")
                         )
                     } label: {
                         ChatListItem()
@@ -60,7 +61,7 @@ struct ChatsView: View {
                         .presentationDetents([.large])
                     })
                     .navigationDestination(isPresented: $showChatView) {
-                        ChatMessagesView(chatId: self.sheetChatID, recipient: self.sheetRecipient, message: self.sheetMessage)
+                        ChatMessagesView(chatId: $sheetChatID, recipient: $sheetRecipient, message: $sheetMessage)
                     }
                 }
             }
@@ -73,6 +74,25 @@ struct ChatsView: View {
             
         }
         
+    }
+    
+    func getRecipient(chat: ChatInfo) -> String {
+        let message = chat.messages[0]
+        let result: String
+        if(message.receiver == FlowManager.shared.userAddress!) {
+            if (message.senderFlown != "") {
+                result = message.senderFlown
+            } else {
+                result = message.sender
+            }
+        } else {
+            if (message.receiverFlown != "") {
+                result = message.receiverFlown
+            } else {
+                result = message.receiver
+            }
+        }
+        return result
     }
     
     func createChat(recipient: String) {
@@ -99,18 +119,6 @@ struct ChatsView: View {
             return
         }
         FlowManager.shared.getUSDCBalance(address: myAddress)
-    }
-    
-    func getFlownFromAddress() {
-        guard let myAddress = fcl.currentUser?.addr.description else {
-            print(FCLError.unauthenticated.localizedDescription)
-            return
-        }
-        FlownManager.shared.getFlownFromAddress(userAddress: myAddress)
-    }
-    
-    func getAddressFromFlown(flown: String) {
-        FlownManager.shared.getAddressFromFlown(flownName: flown)
     }
     
     func transferFlow(amount: Decimal) {

@@ -24,7 +24,7 @@ struct SendNewMessage: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
-            .background(Color(red: 52/255, green: 54/255, blue: 53/255))
+            .background(.thinMaterial)
             
             HStack {
                 Text("To: ")
@@ -65,23 +65,40 @@ struct SendNewMessage: View {
         }
     }
     
-    func sendMessage() {
-        let chatId = FirebaseManager.shared.createChat(primaryUser: FlowManager.shared.userAddress!, secondaryUser: self.sheetRecipient)
-        let recieverFlown = FlownManager.shared.getFlownFromAddress(userAddress: self.sheetRecipient)
-        let senderFlown = FlownManager.shared.getFlownFromAddress(userAddress: FlowManager.shared.userAddress!)
+    func sendMessage()  {
+        var receiver: String = ""
+        var receiverFlown: String = ""
+        // if the user sent a flown name, get the owner address
+        if self.sheetRecipient.hasSuffix(".fn") {
+            let flown = FlownManager.shared.getAddressFromFlown(flownName: self.sheetRecipient)
+            receiver = flown.owner
+            receiverFlown = self.sheetRecipient
+        } else {
+            receiver = self.sheetRecipient
+            let flowns =  FlownManager.shared.getFlownFromAddress(userAddress: self.sheetRecipient)
+            print(flowns)
+            receiverFlown = flowns.isEmpty ? "": flowns[0].name
+        }
+        let chatId = FirebaseManager.shared.createChat(primaryUser: FlowManager.shared.userAddress!, secondaryUser: receiver)
+
+        let senderFlown =  FlownManager.shared.getFlownFromAddress(userAddress: FlowManager.shared.userAddress!)
+        
         FirebaseManager.shared.addMessagesToChat(
             chatId: chatId,
-            receiver: self.sheetRecipient,
-            receiverFlown: recieverFlown.isEmpty ? "" : recieverFlown[0].name ,
+            receiver: receiver,
+            receiverFlown: receiverFlown ,
             sender: FlowManager.shared.userAddress!,
             senderFlown: senderFlown.isEmpty ? "" : senderFlown[0].name,
             content: self.sheetMessage
         )
         
         self.sheetChatID = chatId
-        self.sheetRecipient = recieverFlown.isEmpty ? "" : recieverFlown[0].name
-        self.showChatView.toggle()
+        self.sheetRecipient = receiverFlown != "" ? receiverFlown : receiver
+        print("rrecep")
+        print(self.sheetRecipient)
+        self.sheetMessage = ""
         self.sendNewMessageModalShowing.toggle()
+        self.showChatView.toggle()
     }
 }
 

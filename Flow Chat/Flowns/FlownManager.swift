@@ -13,7 +13,7 @@ struct Profile: Decodable {
     let avatar: String
 }
 struct Texts: Decodable {
-    let profile: String
+    let profile : String?
 }
 struct Flown: Decodable {
     let id: String
@@ -25,20 +25,25 @@ struct Flown: Decodable {
 class FlownManager: ObservableObject {
     
     static let shared = FlownManager()
+    var flownArray: [Flown] = []
     
-    
-    func getFlownFromAddress(userAddress: String) -> [Flown]{
+    func getFlownFromAddress(userAddress: String)  -> [Flown]{
         var url = "https://testnet.flowns.org/api/data/address/"
         url += userAddress
+        print(url)
         let flownUrl = URL(string: url)!
+        let sem = DispatchSemaphore(value: 0)
         var flownArray: [Flown] = []
         let task = URLSession.shared.dataTask(with: flownUrl) { data, response, error in
+            defer { sem.signal() }
             if let data = data {
-                if let flowns = try? JSONDecoder().decode([Flown].self, from: data) {
+                if let flowns = try? JSONDecioder().decode([Flown].self, from: data) {
+                    print("flowns")
+                    print(flowns)
                     flownArray = flowns
                 } else {
                     print("Invalid Response")
-                    flownArray = []
+                    self.flownArray = []
                 }
             } else if let error = error {
                 print("HTTP Request Failed \(error)")
@@ -46,21 +51,27 @@ class FlownManager: ObservableObject {
             }
         }
         task.resume()
-        
+        sem.wait(timeout: DispatchTime.distantFuture)
+        print("flownsarray")
+        print(flownArray)
         return flownArray
     }
     
     
-    func getAddressFromFlown(flownName: String) {
+    func getAddressFromFlown(flownName: String) -> Flown {
         var url = "https://testnet.flowns.org/api/data/domain/"
         url += flownName
         print(url)
         let flownUrl = URL(string: url)!
-        
+        var userFlown: Flown = Flown(id: "", owner: "", name: "", texts: Texts(profile: ""))
+        let sem = DispatchSemaphore(value: 0)
         let task = URLSession.shared.dataTask(with: flownUrl) { data, response, error in
+            defer { sem.signal() }
             if let data = data {
                 if let flown = try? JSONDecoder().decode(Flown.self, from: data) {
+                    print("flown")
                     print(flown)
+                    userFlown = flown
                 } else {
                     print("Invalid Response")
                 }
@@ -69,5 +80,7 @@ class FlownManager: ObservableObject {
             }
         }
         task.resume()
+        sem.wait(timeout: DispatchTime.distantFuture)
+        return userFlown
     }
 }

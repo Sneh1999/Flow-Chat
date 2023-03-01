@@ -84,6 +84,10 @@ class FlowManager: ObservableObject {
     func transferUSDC(amount: Decimal, recipient: Flow.Address) {
         Task {
             do {
+                let hasUSDCVault: Bool = try await fcl.query(script: FlowCadence.hasUSDCVault, args: [.address(recipient)]).decode()
+                if (!hasUSDCVault) {
+                    return
+                }
                 let txId = try await fcl.mutate(cadence: FlowCadence.transferUSDC, args: [.ufix64(amount), .address(recipient)])
                 print(txId.hex)
                 FlowManager.shared.subscribeTransaction(txId: txId.hex)
