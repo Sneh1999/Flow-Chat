@@ -7,7 +7,10 @@
 
 import SwiftUI
 import Flow
+import UIKit
 
+
+struct
 
 struct ChatMessagesView: View {
     
@@ -107,8 +110,7 @@ struct ChatMessagesView: View {
                     HStack {
                         Text(self.recipient).fontWeight(.bold)
                         Spacer()
-                        Image("profile")
-                            .resizable()
+                        AsyncImage(url: URL(string: FlownManager.shared.getAvatar(recipient: self.recipient)))
                             .frame(width: 40, height: 40)
                             .clipShape(Circle())
                     }
@@ -118,13 +120,12 @@ struct ChatMessagesView: View {
         
     }
     
+
+    
     func sendMessage() {
         if (self.message.isEmpty) {
             return
         }
-        
-        print("recipient is")
-        print(self.recipient)
         
         var receiver: String = ""
         var receiverFlown: String = ""
@@ -134,14 +135,11 @@ struct ChatMessagesView: View {
             receiver = flown.owner
             receiverFlown = self.recipient
         } else {
-            print("I came here")
             receiver = self.recipient
             let flowns =  FlownManager.shared.getFlownFromAddress(userAddress: self.recipient)
             receiverFlown = flowns.isEmpty ? "": flowns[0].name
         }
         let senderFlown = FlownManager.shared.getFlownFromAddress(userAddress: FlowManager.shared.userAddress!)
-        print("recieverFlown is")
-        print(receiverFlown)
         FirebaseManager.shared.addMessagesToChat(
             chatId: chatId,
             receiver: receiver,
