@@ -30,7 +30,7 @@ struct ChatsView: View {
                                     .constant(getRecipient(chat: chat)), message: .constant("")
                         )
                     } label: {
-                        ChatListItem()
+                        ChatListItem(chat: chat)
                     }
                     
                 }

@@ -11,9 +11,7 @@ import UIKit
 
 
 
-struct Profile: Decodable {
-    let avatar: String
-}
+
 struct Texts: Decodable {
     let profile : String?
 }
@@ -40,8 +38,6 @@ class FlownManager: ObservableObject {
             defer { sem.signal() }
             if let data = data {
                 if let flowns = try? JSONDecoder().decode([Flown].self, from: data) {
-                    print("flowns")
-                    print(flowns)
                     flownArray = flowns
                 } else {
                     print("Invalid Response")
@@ -61,25 +57,7 @@ class FlownManager: ObservableObject {
     
     
     
-    func getAvatar(recipient: String) -> String {
-        // if the user sent a flown name, get the owner address
-//        if recipient.hasSuffix(".fn") {
-//            let flown = FlownManager.shared.getAddressFromFlown(flownName: recipient)
-//           
-//        } else {
-//            
-//            let flowns =  FlownManager.shared.getFlownFromAddress(userAddress: recipient)
-//            if !flowns.isEmpty  {
-//                let texts = flowns[0].texts
-//                if texts.profile {
-//                    return texts.profile
-//                }
-//            }
-//            
-//           
-//        }
-        return "https://avatar.vercel.sh/" + recipient
-    }
+    
     
     func getAddressFromFlown(flownName: String) -> Flown {
         var url = "https://testnet.flowns.org/api/data/domain/"

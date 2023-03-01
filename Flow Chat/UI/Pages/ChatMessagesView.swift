@@ -10,7 +10,10 @@ import Flow
 import UIKit
 
 
-struct
+struct Profile: Decodable {
+    let avatar: String
+}
+
 
 struct ChatMessagesView: View {
     
@@ -21,6 +24,7 @@ struct ChatMessagesView: View {
     @FocusState var messageIsFocused: Bool
     
     @State var showSendFlowModal: Bool = false
+    @State var avatar: String = ""
     
     var body: some View {
         NavigationStack {
@@ -75,7 +79,7 @@ struct ChatMessagesView: View {
                             .foregroundColor(Color(red: 0, green: 239/255, blue: 139/255))
                             .font(.system(size: 25))
                     }
-
+                    
                     HStack {
                         Spacer()
                         TextField("What's on your mind?", text: $message)
@@ -110,7 +114,13 @@ struct ChatMessagesView: View {
                     HStack {
                         Text(self.recipient).fontWeight(.bold)
                         Spacer()
-                        AsyncImage(url: URL(string: FlownManager.shared.getAvatar(recipient: self.recipient)))
+                        
+                        AsyncImage(url:  URL(string: getAvatar(recipient: self.recipient))) { image in
+                            image.resizable()
+                        }
+                            placeholder: {
+                                ProgressView()
+                            }
                             .frame(width: 40, height: 40)
                             .clipShape(Circle())
                     }
@@ -120,7 +130,45 @@ struct ChatMessagesView: View {
         
     }
     
-
+    func getAvatar(recipient: String) -> String {
+        // if the user sent a flown name, get the owner address
+        if recipient.hasSuffix(".fn") {
+            let flown = FlownManager.shared.getAddressFromFlown(flownName: recipient)
+            
+            if (flown.texts.profile != nil) {
+                let jsonData = flown.texts.profile!.data(using: .utf8)!
+                if let profile = try? JSONDecoder().decode(Profile.self, from: jsonData) {
+                    print("avatar")
+                    avatar = profile.avatar
+                    return profile.avatar
+                } else {
+                    print("Invalid Response")
+                    avatar = "https://avatar.vercel.sh/" + recipient
+                    return "https://avatar.vercel.sh/" + recipient
+                }
+            }
+            
+        } else {
+            let flowns =   FlownManager.shared.getFlownFromAddress(userAddress: recipient)
+            if !flowns.isEmpty  {
+                let texts = flowns[0].texts
+                if (texts.profile != nil) {
+                    let jsonData = texts.profile!.data(using: .utf8)!
+                    if let profile = try? JSONDecoder().decode(Profile.self, from: jsonData) {
+                        avatar = profile.avatar
+                        return profile.avatar
+                        
+                    } else {
+                        print("Invalid Response")
+                        return "https://avatar.vercel.sh/" + recipient
+                    }
+                }
+            }
+        }
+        avatar = "https://avatar.vercel.sh/" + recipient
+        return "https://avatar.vercel.sh/" + recipient
+    }
+    
     
     func sendMessage() {
         if (self.message.isEmpty) {
