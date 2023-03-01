@@ -76,7 +76,7 @@ struct SendFlowModal: View {
         
         FlowManager.shared.transferFlow(amount: amount, recipient: Flow.Address(hex: receiver))
         
-        FirebaseManager.shared.addMessagesToChat(chatId: self.chatId, receiver: receiver, receiverFlown: receiverFlown, sender: FlowManager.shared.userAddress!, senderFlown: senderFlown[0].name, content: "FLOW Transfer \(self.flowAmount)")
+        FirebaseManager.shared.addMessagesToChat(chatId: self.chatId, receiver: receiver, receiverFlown: receiverFlown, sender: FlowManager.shared.userAddress!, senderFlown: senderFlown.isEmpty ? "" : senderFlown[0].name, content: "FLOW Transfer \(self.flowAmount)")
     }
 }
 

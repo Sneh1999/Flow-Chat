@@ -9,118 +9,103 @@ import SwiftUI
 import Flow
 import UIKit
 
-
-struct
-
 struct ChatMessagesView: View {
     
     @ObservedObject var firebase = FirebaseManager.shared
-    @Binding var chatId: String
-    @Binding var recipient: String
-    @Binding var message: String
+    @State var chatId: String
+    @State var recipient: String
+    @State var message: String = ""
     @FocusState var messageIsFocused: Bool
     
     @State var showSendFlowModal: Bool = false
+    @State var showSendUSDCModal: Bool = false
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ScrollView {
-                    ScrollViewReader { value in
-                        VStack {
-                            Spacer()
-                            if ( firebase.allChats.first(where: {$0.id == chatId}) != nil)  {
-                                
-                                ForEach(firebase.allChats.first(where: {$0.id == chatId})!.messages, id: \.hashValue) { message in
-                                    
-                                    
-                                    if message.receiver == FlowManager.shared.userAddress! {
-                                        ChatBubble(direction: .left) {
-                                            Text(message.content)
-                                                .padding([.leading, .trailing], 20)
-                                                .padding([.top, .bottom], 15)
-                                                .foregroundColor(Color.white)
-                                                .background(Color.green)
-                                        }
-                                        .padding(.horizontal, 20)
-                                    } else {
-                                        ChatBubble(direction: .right) {
-                                            Text(message.content)
-                                                .padding([.leading, .trailing], 20)
-                                                .padding([.top, .bottom], 15)
-                                                .foregroundColor(Color.white)
-                                                .background(Color.blue)
-                                        }
+            ScrollView {
+                ScrollViewReader { value in
+                    VStack {
+                        Spacer()
+                        let chat = firebase.allChats.first(where: {$0.id == chatId})
+                        if (chat != nil)  {
+                            let chatMessages = chat!.messages
+                            ForEach(chatMessages, id: \.hashValue) { message in
+                                ChatMessagesList(message: message)
+                                    .onChange(of: chatMessages.count) { _ in
+                                        value.scrollTo(chatMessages.last?.hashValue)
                                     }
-                                }
-                                .onChange(of: firebase.allChats.first(where: {$0.id == chatId})!.messages.count) { _ in
-                                    value.scrollTo(firebase.allChats.first(where: {$0.id == chatId})!.messages.last?.hashValue)
-                                }
-                                
                             }
-                            
                         }
-                        
                     }
                 }
-                
-                HStack {
+            }
+            
+            HStack {
+                Button {
+                    showSendUSDCModal.toggle()
+                } label: {
                     Image(systemName: "dollarsign.circle.fill")
                         .foregroundColor(Color(red: 39/255, green: 116/255, blue: 202/255))
                         .font(.system(size: 25))
-                    Button {
-                        showSendFlowModal.toggle()
-                    } label: {
-                        Image(systemName: "florinsign.circle.fill")
-                            .foregroundColor(Color(red: 0, green: 239/255, blue: 139/255))
-                            .font(.system(size: 25))
-                    }
-
-                    HStack {
-                        Spacer()
-                        TextField("What's on your mind?", text: $message)
-                            .frame(maxWidth: .infinity)
-                            .focused($messageIsFocused)
-                        Button(action: {
-                            sendMessage()
-                            messageIsFocused.toggle()
-                            message = ""
-                        }) {
-                            Image(systemName: "arrow.up.circle.fill")
-                                .foregroundColor(.green)
-                                .font(.system(size: 25))
-                        }
-                        
-                    }
-                    .padding(.horizontal, 5)
-                    .padding(.vertical, 5)
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2).foregroundColor(Color(red: 52/255, green: 54/255, blue: 53/255)))
-                }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 10)
-                .sheet(isPresented: $showSendFlowModal) {
-                    SendFlowModal(chatId: chatId, recipient: recipient)
-                        .presentationDetents([.medium])
                 }
                 
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack {
-                        Text(self.recipient).fontWeight(.bold)
-                        Spacer()
-                        AsyncImage(url: URL(string: FlownManager.shared.getAvatar(recipient: self.recipient)))
-                            .frame(width: 40, height: 40)
-                            .clipShape(Circle())
+                Button {
+                    showSendFlowModal.toggle()
+                } label: {
+                    Image(systemName: "florinsign.circle.fill")
+                        .foregroundColor(Color(red: 0, green: 239/255, blue: 139/255))
+                        .font(.system(size: 25))
+                }
+                
+                HStack {
+                    Spacer()
+                    
+                    TextField("What's on your mind?", text: $message)
+                        .frame(maxWidth: .infinity)
+                        .focused($messageIsFocused)
+                    
+                    Button(action: {
+                        sendMessage()
+                        messageIsFocused.toggle()
+                        
+                    }) {
+                        Image(systemName: "arrow.up.circle.fill")
+                            .foregroundColor(.green)
+                            .font(.system(size: 25))
                     }
+                    
+                }
+                .padding(.horizontal, 5)
+                .padding(.vertical, 5)
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2).foregroundColor(Color(red: 52/255, green: 54/255, blue: 53/255)))
+            }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 10)
+            .sheet(isPresented: $showSendFlowModal) {
+                SendFlowModal(chatId: chatId, recipient: recipient)
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $showSendUSDCModal) {
+                SendUSDCModal(chatId: chatId, recipient: recipient)
+                    .presentationDetents([.medium])
+            }
+            
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Text(self.recipient).fontWeight(.bold)
+                    Spacer()
+                    AsyncImage(url: URL(string: FlownManager.shared.getAvatar(recipient: self.recipient)))
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
                 }
             }
         }
-        
     }
     
-
+    
     
     func sendMessage() {
         if (self.message.isEmpty) {
@@ -148,15 +133,18 @@ struct ChatMessagesView: View {
             senderFlown: senderFlown.isEmpty ? "" : senderFlown[0].name,
             content: self.message
         )
+        
+        self.message = ""
     }
+    
 }
 
 struct ChatMessagesView_Previews: PreviewProvider {
     static var previews: some View {
         ChatMessagesView(
-            chatId: .constant("Rn4An4tRVyiiiubtidFO"),
-            recipient: .constant("0xabcdef"),
-            message: .constant("")
+            chatId: "Rn4An4tRVyiiiubtidFO",
+            recipient: "0xabcdef",
+            message: ""
         )
     }
 }
