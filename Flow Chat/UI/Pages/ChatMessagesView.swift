@@ -26,6 +26,7 @@ struct ChatMessagesView: View {
     @State var showSendFlowModal: Bool = false
     @State var avatar: String = ""
     @State var showSendUSDCModal: Bool = false
+    @State var showTopshotMomentsModal: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -64,6 +65,13 @@ struct ChatMessagesView: View {
                         .font(.system(size: 25))
                 }
                 
+                Button {
+                    showTopshotMomentsModal.toggle()
+                } label: {
+                    Image(systemName: "photo.fill")
+                        .font(.system(size: 25))
+                }
+                
                 HStack {
                     Spacer()
                     
@@ -94,6 +102,10 @@ struct ChatMessagesView: View {
             }
             .sheet(isPresented: $showSendUSDCModal) {
                 SendUSDCModal(chatId: chatId, recipient: recipient)
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $showTopshotMomentsModal) {
+                TopshotMomentsModal(chatId: chatId, recipient: recipient)
                     .presentationDetents([.medium])
             }
             

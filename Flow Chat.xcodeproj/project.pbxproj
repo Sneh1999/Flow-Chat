@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A14C98FE29AF184F00DBE2F8 /* ChatMessagesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C98FD29AF184F00DBE2F8 /* ChatMessagesList.swift */; };
+		A14C990029AF27B100DBE2F8 /* TopshotMomentsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C98FF29AF27B100DBE2F8 /* TopshotMomentsModal.swift */; };
+		A14C990329AF28B300DBE2F8 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = A14C990229AF28B300DBE2F8 /* WrappingHStack */; };
 		C131152E29A2875100227386 /* Flow_ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131152D29A2875100227386 /* Flow_ChatApp.swift */; };
 		C131153029A2875100227386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131152F29A2875100227386 /* ContentView.swift */; };
 		C131153229A2875400227386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C131153129A2875400227386 /* Assets.xcassets */; };
@@ -64,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		A14C98FD29AF184F00DBE2F8 /* ChatMessagesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesList.swift; sourceTree = "<group>"; };
+		A14C98FF29AF27B100DBE2F8 /* TopshotMomentsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopshotMomentsModal.swift; sourceTree = "<group>"; };
 		C131152A29A2875100227386 /* Flow Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flow Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C131152D29A2875100227386 /* Flow_ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow_ChatApp.swift; sourceTree = "<group>"; };
 		C131152F29A2875100227386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 			files = (
 				C180884129A861FD00C90D87 /* FirebaseDatabaseSwift in Frameworks */,
 				C180884929A861FD00C90D87 /* FirebaseFunctions in Frameworks */,
+				A14C990329AF28B300DBE2F8 /* WrappingHStack in Frameworks */,
 				C180884F29A861FD00C90D87 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				C180885529A861FD00C90D87 /* FirebaseStorageCombine-Community in Frameworks */,
 				C180884D29A861FD00C90D87 /* FirebaseInAppMessaging-Beta in Frameworks */,
@@ -197,6 +201,7 @@
 				C17BB18829AD094F009B3A71 /* SendFlowModal.swift */,
 				C17BB18C29AE5550009B3A71 /* SendUSDCModal.swift */,
 				A14C98FD29AF184F00DBE2F8 /* ChatMessagesList.swift */,
+				A14C98FF29AF27B100DBE2F8 /* TopshotMomentsModal.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				C180885029A861FD00C90D87 /* FirebaseMessaging */,
 				C180885229A861FD00C90D87 /* FirebaseStorage */,
 				C180885429A861FD00C90D87 /* FirebaseStorageCombine-Community */,
+				A14C990229AF28B300DBE2F8 /* WrappingHStack */,
 			);
 			productName = "Flow Chat";
 			productReference = C131152A29A2875100227386 /* Flow Chat.app */;
@@ -355,6 +361,7 @@
 			packageReferences = (
 				C131156529A2A94D00227386 /* XCRemoteSwiftPackageReference "fcl-swift" */,
 				C180883D29A861FD00C90D87 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A14C990129AF28B300DBE2F8 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = C131152B29A2875100227386 /* Products */;
 			projectDirPath = "";
@@ -414,6 +421,7 @@
 				C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */,
 				C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */,
 				C17BB18B29AD0EEE009B3A71 /* TokenTransferBubble.swift in Sources */,
+				A14C990029AF27B100DBE2F8 /* TopshotMomentsModal.swift in Sources */,
 				C131153029A2875100227386 /* ContentView.swift in Sources */,
 				C1F719F629A41B84003A2B08 /* ChatsView.swift in Sources */,
 				C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */,
@@ -738,6 +746,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A14C990129AF28B300DBE2F8 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		C131156529A2A94D00227386 /* XCRemoteSwiftPackageReference "fcl-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/outblock/fcl-swift.git";
@@ -757,6 +773,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A14C990229AF28B300DBE2F8 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A14C990129AF28B300DBE2F8 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		C131156629A2A94D00227386 /* FCL */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C131156529A2A94D00227386 /* XCRemoteSwiftPackageReference "fcl-swift" */;

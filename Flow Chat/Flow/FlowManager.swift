@@ -23,6 +23,9 @@ class FlowManager: ObservableObject {
     @Published
     var userAddress: String? = nil
     
+    @Published
+    var topshotIds: [Decimal] = []
+    
     func setUserAddress(newAddr: String) {
         self.userAddress = newAddr
     }
@@ -68,6 +71,18 @@ class FlowManager: ObservableObject {
             }
         }
     }
+    
+    func getTopshotMoments() {
+        Task {
+            do {
+                let ids: [Decimal] = try await fcl.query(script: FlowCadence.fetchTopshotMoments, args: [.address(Flow.Address(hex: userAddress!))]).decode()
+                self.topshotIds = ids
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     func transferFlow(amount: Decimal, recipient: Flow.Address) {
         Task {
             do {
