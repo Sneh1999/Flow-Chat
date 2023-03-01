@@ -48,7 +48,7 @@ class FlowCadence {
     pub fun main(account: Address): Bool {
         let acct = getAccount(account)
         
-        if acct.getCapability(FiatToken.VaultBalancePubPath).borrow<&FiatToken.Vault>() != nil {
+        if acct.getCapability(FiatToken.VaultBalancePubPath).borrow<&FiatToken.Vault{FungibleToken.Balance}>() != nil {
             return true
         }
     
