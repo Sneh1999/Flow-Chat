@@ -7,6 +7,7 @@
 
 import FCL
 import Flow
+import SwiftUI
 import Foundation
 import UIKit
 
@@ -51,7 +52,6 @@ class FlowManager: ObservableObject {
             do {
                 let balance: Decimal? = try await fcl.query(script: FlowCadence.getBalance, args: [.address(address)]).decode()
                 self.state.balance = balance!
-                print(balance?.description)
             } catch {
                 print(error)
             }
@@ -63,7 +63,6 @@ class FlowManager: ObservableObject {
             do {
                 let balance: Decimal? = try await fcl.query(script: FlowCadence.getUSDCBalance, args: [.address(address)]).decode()
                 self.state.balance = balance!
-                print(balance?.description)
             } catch {
                 print(error)
             }
@@ -81,11 +80,19 @@ class FlowManager: ObservableObject {
         
     }
     
-    func transferUSDC(amount: Decimal, recipient: Flow.Address) {
+    func transferUSDC(amount: Decimal, recipient: Flow.Address, showError: Binding<Bool>) {
         Task {
             do {
-                let hasUSDCVault: Bool = try await fcl.query(script: FlowCadence.hasUSDCVault, args: [.address(recipient)]).decode()
-                if (!hasUSDCVault) {
+                let senderHasUSDCVault: Bool = try await fcl.query(script: FlowCadence.hasUSDCVault, args: [.address(Flow.Address(hex: userAddress!))]).decode()
+                if (!senderHasUSDCVault) {
+                    showError.wrappedValue.toggle()
+                    print("sender doesnt have usdc vault")
+                    return
+                }
+                let recipientHasUSDCVault: Bool = try await fcl.query(script: FlowCadence.hasUSDCVault, args: [.address(recipient)]).decode()
+                if (!recipientHasUSDCVault) {
+                    showError.wrappedValue.toggle()
+                    print("recipient doesnt have usdc vault")
                     return
                 }
                 let txId = try await fcl.mutate(cadence: FlowCadence.transferUSDC, args: [.ufix64(amount), .address(recipient)])
@@ -95,7 +102,6 @@ class FlowManager: ObservableObject {
                 print(error)
             }
         }
-        
     }
     
     func setup() {

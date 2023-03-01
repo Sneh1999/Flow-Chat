@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A14C98FE29AF184F00DBE2F8 /* ChatMessagesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C98FD29AF184F00DBE2F8 /* ChatMessagesList.swift */; };
 		C131152E29A2875100227386 /* Flow_ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131152D29A2875100227386 /* Flow_ChatApp.swift */; };
 		C131153029A2875100227386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131152F29A2875100227386 /* ContentView.swift */; };
 		C131153229A2875400227386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C131153129A2875400227386 /* Assets.xcassets */; };
@@ -15,7 +16,7 @@
 		C131156729A2A94D00227386 /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = C131156629A2A94D00227386 /* FCL */; };
 		C131156C29A2AAFD00227386 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C131156B29A2AAFD00227386 /* FlowManager.swift */; };
 		C17BB18929AD094F009B3A71 /* SendFlowModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB18829AD094F009B3A71 /* SendFlowModal.swift */; };
-		C17BB18B29AD0EEE009B3A71 /* FlowTransferBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB18A29AD0EEE009B3A71 /* FlowTransferBubble.swift */; };
+		C17BB18B29AD0EEE009B3A71 /* TokenTransferBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB18A29AD0EEE009B3A71 /* TokenTransferBubble.swift */; };
 		C17BB18D29AE5550009B3A71 /* SendUSDCModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB18C29AE5550009B3A71 /* SendUSDCModal.swift */; };
 		C180883C29A85CB800C90D87 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C180883B29A85CB700C90D87 /* GoogleService-Info.plist */; };
 		C180883F29A861FD00C90D87 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C180883E29A861FD00C90D87 /* FirebaseDatabase */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A14C98FD29AF184F00DBE2F8 /* ChatMessagesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagesList.swift; sourceTree = "<group>"; };
 		C131152A29A2875100227386 /* Flow Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flow Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C131152D29A2875100227386 /* Flow_ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow_ChatApp.swift; sourceTree = "<group>"; };
 		C131152F29A2875100227386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,7 +74,7 @@
 		C131156329A2A6EF00227386 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C131156B29A2AAFD00227386 /* FlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowManager.swift; sourceTree = "<group>"; };
 		C17BB18829AD094F009B3A71 /* SendFlowModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFlowModal.swift; sourceTree = "<group>"; };
-		C17BB18A29AD0EEE009B3A71 /* FlowTransferBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowTransferBubble.swift; sourceTree = "<group>"; };
+		C17BB18A29AD0EEE009B3A71 /* TokenTransferBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTransferBubble.swift; sourceTree = "<group>"; };
 		C17BB18C29AE5550009B3A71 /* SendUSDCModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUSDCModal.swift; sourceTree = "<group>"; };
 		C180883B29A85CB700C90D87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C180885729A864DE00C90D87 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				C1CB21F829AA9995002C08AD /* ChatBubble.swift */,
 				C17BB18829AD094F009B3A71 /* SendFlowModal.swift */,
 				C17BB18C29AE5550009B3A71 /* SendUSDCModal.swift */,
+				A14C98FD29AF184F00DBE2F8 /* ChatMessagesList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -210,7 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				C1CB21F629AA9946002C08AD /* ChatBubbleShape.swift */,
-				C17BB18A29AD0EEE009B3A71 /* FlowTransferBubble.swift */,
+				C17BB18A29AD0EEE009B3A71 /* TokenTransferBubble.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				C131156429A2A6EF00227386 /* LoginView.swift in Sources */,
 				C1CB21F429AA98D4002C08AD /* PrimaryMessage.swift in Sources */,
 				C17BB18929AD094F009B3A71 /* SendFlowModal.swift in Sources */,
+				A14C98FE29AF184F00DBE2F8 /* ChatMessagesList.swift in Sources */,
 				C1CB21EF29AA5D34002C08AD /* FlownManager.swift in Sources */,
 				C17BB18D29AE5550009B3A71 /* SendUSDCModal.swift in Sources */,
 				C1CB21F229AA94F2002C08AD /* ChatMessagesView.swift in Sources */,
@@ -409,7 +413,7 @@
 				C1CB21EC29A9E2D3002C08AD /* SendNewMessage.swift in Sources */,
 				C1F719EE29A3D636003A2B08 /* FlowCadence.swift in Sources */,
 				C1F719EC29A2B66A003A2B08 /* ContentViewModel.swift in Sources */,
-				C17BB18B29AD0EEE009B3A71 /* FlowTransferBubble.swift in Sources */,
+				C17BB18B29AD0EEE009B3A71 /* TokenTransferBubble.swift in Sources */,
 				C131153029A2875100227386 /* ContentView.swift in Sources */,
 				C1F719F629A41B84003A2B08 /* ChatsView.swift in Sources */,
 				C1F719E929A2B621003A2B08 /* AnyViewModel.swift in Sources */,

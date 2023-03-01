@@ -26,8 +26,8 @@ struct ChatsView: View {
                     
                     NavigationLink {
                         ChatMessagesView(
-                            chatId: .constant(chat.id!), recipient:
-                                    .constant(getRecipient(chat: chat)), message: .constant("")
+                            chatId: chat.id!, recipient:
+                                    getRecipient(chat: chat), message: ""
                         )
                     } label: {
                         ChatListItem(chat: chat)
@@ -61,7 +61,7 @@ struct ChatsView: View {
                         .presentationDetents([.large])
                     })
                     .navigationDestination(isPresented: $showChatView) {
-                        ChatMessagesView(chatId: $sheetChatID, recipient: $sheetRecipient, message: $sheetMessage)
+                        ChatMessagesView(chatId: sheetChatID, recipient: sheetRecipient)
                     }
                 }
             }

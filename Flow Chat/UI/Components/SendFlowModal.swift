@@ -13,14 +13,19 @@ struct SendFlowModal: View {
     @State var chatId: String
     @State var recipient: String
     @State var flowAmount: String = "0"
+    @State var avatar: String = ""
     @FocusState private var flowAmountIsFocused: Bool
     
     var body: some View {
         VStack {
-            Image("profile")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .padding(.top, 30)
+            AsyncImage(url:  URL(string: getAvatar(recipient: self.recipient))) { image in
+                image.resizable()
+            }
+        placeholder: {
+            ProgressView()
+        }
+        .frame(width: 100, height: 100)
+        .clipShape(Circle())
             
             Text(self.recipient)
             
@@ -52,6 +57,45 @@ struct SendFlowModal: View {
         }
     }
     
+    func getAvatar(recipient: String) -> String {
+        // if the user sent a flown name, get the owner address
+        if recipient.hasSuffix(".fn") {
+            let flown = FlownManager.shared.getAddressFromFlown(flownName: recipient)
+            
+            if (flown.texts.profile != nil) {
+                let jsonData = flown.texts.profile!.data(using: .utf8)!
+                if let profile = try? JSONDecoder().decode(Profile.self, from: jsonData) {
+                    print("avatar")
+                    avatar = profile.avatar
+                    return profile.avatar
+                } else {
+                    print("Invalid Response")
+                    avatar = "https://avatar.vercel.sh/" + recipient
+                    return "https://avatar.vercel.sh/" + recipient
+                }
+            }
+            
+        } else {
+            let flowns =   FlownManager.shared.getFlownFromAddress(userAddress: recipient)
+            if !flowns.isEmpty  {
+                let texts = flowns[0].texts
+                if (texts.profile != nil) {
+                    let jsonData = texts.profile!.data(using: .utf8)!
+                    if let profile = try? JSONDecoder().decode(Profile.self, from: jsonData) {
+                        avatar = profile.avatar
+                        return profile.avatar
+                        
+                    } else {
+                        print("Invalid Response")
+                        return "https://avatar.vercel.sh/" + recipient
+                    }
+                }
+            }
+        }
+        avatar = "https://avatar.vercel.sh/" + recipient
+        return "https://avatar.vercel.sh/" + recipient
+    }
+    
     func sendFlow() {
         var receiver: String = ""
         var receiverFlown: String = ""
@@ -76,7 +120,7 @@ struct SendFlowModal: View {
         
         FlowManager.shared.transferFlow(amount: amount, recipient: Flow.Address(hex: receiver))
         
-        FirebaseManager.shared.addMessagesToChat(chatId: self.chatId, receiver: receiver, receiverFlown: receiverFlown, sender: FlowManager.shared.userAddress!, senderFlown: senderFlown[0].name, content: "FLOW Transfer \(self.flowAmount)")
+        FirebaseManager.shared.addMessagesToChat(chatId: self.chatId, receiver: receiver, receiverFlown: receiverFlown, sender: FlowManager.shared.userAddress!, senderFlown: senderFlown.isEmpty ? "" : senderFlown[0].name, content: "FLOW Transfer \(self.flowAmount)")
     }
 }
 
